@@ -157,6 +157,23 @@ slides. The second is the one most likely to change the headline result, since a
 class-conditional Gaussian control peaks at 16 dimensions. No reported number depends
 on any of the three.
 
+---
+
+## Authors
+
+**Anik Dev Nath** (corresponding author)
+Department of Electrical and Electronics Engineering,
+Ahsanullah University of Science and Technology, Tejgaon, Dhaka, Bangladesh
+<anik.eee.aust@gmail.com>
+
+**Fariha Jahan**
+Department of Computer Science and Engineering,
+Daffodil International University, Dhaka, Bangladesh
+<farihajahan.cse@diu.edu.bd>
+
+A manuscript reporting this work is in preparation. Please contact the corresponding
+author before using these results in a publication.
+
 ## Licence
 
 MIT. See `LICENSE`.
