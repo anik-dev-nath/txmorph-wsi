@@ -1,0 +1,16 @@
+# Filesystem layout on the AI-server (A40 24GB, single-node). Everything lives
+# under /home/anik-server so it is self-contained. Raw slides are read-only once
+# staged; tile_emb/ is write-once then immutable (see CLAUDE.md S12).
+raw_wsi:  /home/anik-server/data/raw_wsi          # stage DUA-governed WSIs here (read-only)
+tiles:    /home/anik-server/data/tiles            # regenerable tile cache
+tile_emb: /home/anik-server/data/tile_emb         # write-once, then chmod a-w
+paired:   /home/anik-server/data/paired.parquet   # team contract
+slides:   /home/anik-server/data/slides.csv       # one row per WSI: slide_id + subtype
+clinical: /home/anik-server/data/clinical.csv     # one row per patient: pre/post slide ids + labels
+runs:     /home/anik-server/runs                  # per-run outputs (gitignored)
+ckpt:     /home/anik-server/checkpoints           # simclr/mil/diffusion weights
+
+# Ablation latent tables (Exp 5). Both are optional; the variants that need them
+# skip cleanly when unset.
+paired_random: /home/anik-server/data/paired_random.parquet  # untrained encoder (script 11)
+paired_mil:    /home/anik-server/data/paired_mil.parquet     # MIL attention pooling (script 05, aggregator.pooling=mil)

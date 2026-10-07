@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+.ipynb_checkpoints/
+runs/
+data/
+*.h5
+*.svs
+*.ndpi
+*.parquet
+*.pt
+.server_credentials
+.claude/

@@ -1,0 +1,13 @@
+experiment: exp4
+# In-silico arm comparison (CLAUDE.md S11-Exp4). Populate `arms` with the trial arms
+# to compare. Each arm carries the drug identity in BOTH encodings so Exp4 works whether
+# the diffusion model was trained one-hot or SMILES, plus the observed trial pCR rate:
+#   drug_id:      raw drug_id exactly as it appears in clinical.csv (one-hot vocab key)
+#   smiles:       regimen SMILES ('.'-joined for combination regimens) -> Morgan fp
+#   observed_pcr: observed pCR rate for that arm in the trial (0..1)
+# Leave `arms` empty ({}) to SKIP Exp4 - never fabricate arm data.
+arms: {}
+# Example (replace with real ISPY2 arms):
+# arms:
+#   paclitaxel:        {drug_id: paclitaxel,        smiles: "CC1=C2...",        observed_pcr: 0.22}
+#   paclitaxel_pembro: {drug_id: paclitaxel_pembro, smiles: "CC1=C2....NC...", observed_pcr: 0.44}

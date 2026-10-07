@@ -1,0 +1,31 @@
+[project]
+name = "txmorph-wsi"
+version = "0.1.0"
+description = "Conditional latent diffusion over WSI embeddings for NAC treatment-response modeling"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+dependencies = [
+  "torch>=2.2",
+  "numpy",
+  "pandas",
+  "pyarrow",
+  "scikit-learn",
+  "scikit-image",
+  "scipy",
+  "lifelines",
+  "statsmodels",
+  "umap-learn",
+  "h5py",
+  "matplotlib",
+  "pyyaml",
+  # config is a lightweight in-repo YAML loader (utils/config.py); Hydra not required
+  # optional / install as needed on the lab server:
+  # "rdkit", "openslide-python", "webdataset"
+]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

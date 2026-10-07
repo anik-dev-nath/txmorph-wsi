@@ -1,0 +1,15 @@
+# Slide-latent pooling for paired.parquet (script 05).
+#   mean - average the tile bag. DEFAULT.
+#   mil  - the trained gated-attention aggregator (subtype aux task).
+#
+# `mean` is the measured choice, not a shortcut. At the Week-12 gate the MIL's
+# attention separated subtype at 0.973 but scored only 0.602 on pCR, while mean
+# pooling of the identical bags reached 0.691 (GO threshold 0.65). Training the
+# attention on a subtype auxiliary task specialised it onto subtype-discriminative
+# tiles and discarded response-relevant ones. Keep `mil` available: the contrast is
+# an Exp-5 ablation with a real mechanism behind it.
+# Evidence: runs/killswitch/pooling_diagnostic.txt
+pooling: mean
+
+epochs: 50
+lr: 1.0e-4

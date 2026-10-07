@@ -1,0 +1,14 @@
+dim: 512
+cond_dim: 512
+T: 1000
+schedule: cosine
+cosine_s: 0.008
+lambda_vlb: 1.0e-3
+conditioning: film
+n_blocks: 3
+width: 512
+n_samples: 100
+clip_x0: null
+lr: 2.0e-4
+batch_size: 64
+n_folds: 5

@@ -1,0 +1,32 @@
+experiment: exp5
+# Ablations (CLAUDE.md S11-Exp5). `variants` selects which ablations to run.
+#
+# Runnable from paired.parquet (retrained/re-inferred in-place here):
+#   no_drug        - remove drug conditioning (constant null drug token), retrain.
+#                    NOTE: in IMPRESS drug_id is perfectly collinear with receptor
+#                    subtype, so this measures the value of the SUBTYPE signal, not
+#                    of drug identity. See configs/drug/encoder.yaml.
+#   crossattn      - FiLM -> cross-attention conditioning, retrain
+#   n_mc_10        - full model, re-score the likelihood ratio with n_mc=10 instead
+#                    of 50. Single-timepoint replacement for n_samples_10: P(pCR) is
+#                    a likelihood ratio, so the Monte-Carlo budget is what controls
+#                    estimator variance.
+#
+# Paired-design only (skipped with a reason in single-timepoint mode, because each
+# would re-score an identical model and report an artifactual 0.000 delta):
+#   n_samples_10     - re-infer with N=10 samples instead of 100
+#   deterministic_ae - diffusion -> deterministic conditional AE (needs z_post)
+#   onehot_drug      - swap SMILES -> one-hot (this cohort has no SMILES, so the
+#                      full model is already one-hot)
+#
+# Need an alternative latent table (skipped unless the path is set):
+#   random_encoder - embeddings from an untrained encoder (paths.paired_random,
+#                    build with scripts/11_build_random_encoder_baseline.py).
+#                    Tests what SimCLR pretraining actually bought.
+#   mil_pooling    - attention pooling instead of mean (paths.paired_mil, build with
+#                    script 05 and aggregator.pooling=mil). At the Week-12 gate the
+#                    subtype-trained attention scored 0.602 on pCR vs 0.691 for mean
+#                    pooling; this quantifies that cost end to end.
+metric: auprc
+variants: [no_drug, crossattn, n_mc_10, random_encoder, mil_pooling,
+           n_samples_10, onehot_drug, deterministic_ae]

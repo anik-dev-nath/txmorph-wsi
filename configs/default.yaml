@@ -1,0 +1,6 @@
+seed: 0
+device: cuda
+precision: bf16
+num_workers: 4          # AI-server has 4 CPU cores; keep dataloader workers <= nproc
+defaults:
+  - paths: default

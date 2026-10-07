@@ -1,0 +1,21 @@
+# Drug encoder (CLAUDE.md S6.4).
+#
+#   onehot - Embedding(drug_id) -> MLP. Closed vocabulary. DEFAULT.
+#   smiles - RDKit Morgan fingerprint -> MLP. Enables zero-shot on unseen drugs.
+#
+# `onehot` is forced by the data, not preferred: IMPRESS ships no SMILES
+# (drug_smiles is empty for all 126 patients), so the smiles path would encode
+# 126 identical all-zero fingerprints and silently destroy the conditioning.
+#
+# CONFOUND, carry this into the manuscript: drug_id is perfectly collinear with
+# receptor subtype in IMPRESS -- NAC+trastuzumab is exactly the 62 HER2+ patients
+# and NAC exactly the 64 TNBC. "Drug conditioning" here is therefore
+# indistinguishable from subtype conditioning, and Exp 5's `no_drug` ablation
+# measures the value of the subtype signal rather than of drug identity. Any
+# drug-specific claim needs a cohort where a regimen spans subtypes (this is also
+# why Exp 4's arm ranking is deferred to future work).
+variant: onehot
+morgan_radius: 2
+morgan_bits: 2048
+out_dim: 128
+combination: bitwise_or
